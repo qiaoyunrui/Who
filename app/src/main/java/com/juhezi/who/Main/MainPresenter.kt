@@ -1,8 +1,20 @@
 package com.juhezi.who.Main
 
+import android.util.Log
+
 /**
  * Created by qiao1 on 2016/9/30.
  */
-public class MainPresenter {
+class MainPresenter(var mView: MainContract.View):MainContract.Presenter {
+
+    private var TAG: String = "MainPresenter"
+
+    init {
+        mView.setPresenter(this)
+    }
+
+    override fun start() {
+        Log.i(TAG,"HelloWorld")
+    }
 
 }
