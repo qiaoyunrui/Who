@@ -17,17 +17,19 @@ import java.util.*
  * Created by qiao1 on 2016/9/30.
  */
 public class MainFragment : MainContract.View,Fragment(){
-
     private var TAG = "MainFragment"
 
     private var rootView: View? = null
-    private var mPresenter: MainContract.Presenter? = null
 
+    private var mPresenter: MainContract.Presenter? = null
     private var mRvList :RecyclerView? = null
+
     private var mRlRandom: RelativeLayout? = null
     private var mBtnOK: Button? = null
     private var mAdapter: MainAdapter? = null
     private var mList: ArrayList<Int> = ArrayList<Int>()
+
+    private var result: Int? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater?.inflate(R.layout.main_frag,container,false)
@@ -35,7 +37,15 @@ public class MainFragment : MainContract.View,Fragment(){
         mRlRandom = rootView?.findViewById(R.id.rl_main_random) as RelativeLayout
         mBtnOK = rootView?.findViewById(R.id.btn_main_ok) as Button
         initRecyclerView()
+        initEvent()
         return rootView
+    }
+
+    private fun initEvent() {
+        mRlRandom?.setOnClickListener {
+            result = mPresenter?.getCount()
+            addCount(result!!)
+        }
     }
 
     private fun initRecyclerView() {
@@ -44,12 +54,6 @@ public class MainFragment : MainContract.View,Fragment(){
         mAdapter = MainAdapter()
         mRvList?.layoutManager = layoutManager
         mRvList?.adapter = mAdapter
-
-        var num = 1..10
-        for(i in num) {
-            mList.add(i)
-        }
-        mAdapter!!.list = mList
     }
 
     override fun onResume() {
@@ -65,6 +69,11 @@ public class MainFragment : MainContract.View,Fragment(){
 
     override fun setPresenter(presenter: MainContract.Presenter) {
         mPresenter = presenter
+    }
+
+    override fun addCount(count: Int) {
+        mAdapter?.addItem(count,
+                {position -> mRvList?.scrollToPosition(position - 1)})
     }
 
 }

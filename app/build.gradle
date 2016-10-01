@@ -30,6 +30,7 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile rootProject.ext.libKotlin
+
     compile rootProject.ext.libSupportAppcomponent
     compile rootProject.ext.libSupportDesign
     compile rootProject.ext.libSupportRecyclerView

@@ -1,4 +1,4 @@
-package com.juhezi.who.Other;
+package com.juhezi.who.other;
 
 /**
  * Created by qiao1 on 2016/9/30.

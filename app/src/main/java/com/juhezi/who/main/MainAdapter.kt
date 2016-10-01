@@ -22,8 +22,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
         notifyDataSetChanged()
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MainViewHolder {
         var v: View = LayoutInflater.from(parent?.context)
                 .inflate(R.layout.random_count_item,parent,false)
@@ -38,6 +36,15 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
         holder?.mTvSerialNum?.text = "${position + 1}"
         holder?.mTvCount?.text = "${list?.get(position)}"
         holder?.mImgTag?.visibility = View.INVISIBLE
+    }
+
+    /**
+     * 添加元素
+     */
+    fun addItem(param: Int,action: (Int) -> Unit){
+        list?.add(param)
+        notifyItemInserted(itemCount)   //显示添加动画
+        action(itemCount)
     }
 
     class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
