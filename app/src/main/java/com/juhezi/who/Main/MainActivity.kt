@@ -1,4 +1,4 @@
-package com.juhezi.who.Main
+package com.juhezi.who.main
 
 import android.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity

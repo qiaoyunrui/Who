@@ -1,4 +1,4 @@
-package com.juhezi.who.Main
+package com.juhezi.who.main
 
 import android.util.Log
 
