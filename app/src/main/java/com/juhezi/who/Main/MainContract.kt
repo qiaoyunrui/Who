@@ -24,6 +24,10 @@ public interface MainContract{
          */
         fun addCount(count : Int)   //Glide
 
+        fun showEmptyView()
+
+        fun hideEmptyView()
+
     }
 
 }

@@ -36,7 +36,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     override fun onBindViewHolder(holder: MainViewHolder?, position: Int) {
         maxCount = list.max()
-        Log.i("Hello",maxCount.toString())
         holder?.mTvSerialNum?.text = "${position + 1}"
         holder?.mTvCount?.text = "${list?.get(position)}"
         if(maxCount == list[position]) {
@@ -53,6 +52,17 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
         list?.add(param)
         notifyItemInserted(itemCount)   //显示添加动画
         action(itemCount)
+        if(list.max() == param) {   //该元素是最大的
+            notifyDataSetChanged()
+        }
+    }
+
+    /**
+     * 清除所有元素
+     */
+    fun clear() {
+        list.clear()
+        notifyDataSetChanged()
     }
 
     class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -66,7 +76,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
             mTvCount = itemView.findViewById(R.id.tv_random_count_item_count) as TextView
             mImgTag = itemView.findViewById(R.id.img_random_count_item_tag) as ImageView
         }
-
     }
 
 }

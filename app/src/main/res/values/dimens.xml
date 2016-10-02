@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="random_area_height">200dp</dimen>
     <dimen name="random_count_item_serial_number_text_size">25sp</dimen>
+    <dimen name="empty_img_size">100dp</dimen>
 </resources>

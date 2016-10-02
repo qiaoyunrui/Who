@@ -4,12 +4,20 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/rl_main_random"
         android:layout_width="match_parent"
+        android:id="@+id/rl_main_random"
         android:layout_height="@dimen/random_area_height"
         android:clickable="true"
-        android:foreground="?selectableItemBackground">
+        android:background="@android:color/white">
 
+        <ImageView
+            android:id="@+id/img_main_random"
+            android:layout_width="@dimen/empty_img_size"
+            android:layout_height="@dimen/empty_img_size"
+            android:layout_centerInParent="true"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_wheel"/>
+        
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -17,7 +25,28 @@
         android:layout_below="@+id/rl_main_random"
         android:layout_above="@+id/ll_main_ok"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent">
+        
+    </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/rl_main_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_main_random"
+        android:layout_above="@+id/ll_main_ok"
+        android:background="@android:color/white">
+
+        <TextView
+            android:textColor="@android:color/black"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/empty_text"/>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/ll_main_ok"
@@ -31,7 +60,7 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/complete"
+            android:text="@string/restart"
             android:backgroundTint="@color/colorAccent"/>
         
     </LinearLayout>
