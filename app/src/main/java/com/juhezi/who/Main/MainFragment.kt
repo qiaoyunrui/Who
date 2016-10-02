@@ -10,26 +10,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RelativeLayout
+import android.widget.Toast
 import com.juhezi.who.R
 import java.util.*
 
 /**
  * Created by qiao1 on 2016/9/30.
  */
-public class MainFragment : MainContract.View,Fragment(){
+class MainFragment : MainContract.View,Fragment(){
     private var TAG = "MainFragment"
 
     private var rootView: View? = null
 
     private var mPresenter: MainContract.Presenter? = null
-    private var mRvList :RecyclerView? = null
 
+    private var mRvList :RecyclerView? = null
     private var mRlRandom: RelativeLayout? = null
+
     private var mBtnOK: Button? = null
     private var mAdapter: MainAdapter? = null
     private var mList: ArrayList<Int> = ArrayList<Int>()
-
     private var result: Int? = null
+    private var lastPosition: Int? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater?.inflate(R.layout.main_frag,container,false)
@@ -43,13 +45,14 @@ public class MainFragment : MainContract.View,Fragment(){
 
     private fun initEvent() {
         mRlRandom?.setOnClickListener {
-            result = mPresenter?.getCount()
+            result = mPresenter?.getCount(mAdapter!!.list,{
+                Toast.makeText(context,"找不到合适的数字啦！！！",Toast.LENGTH_SHORT).show()
+            })
             addCount(result!!)
         }
     }
 
     private fun initRecyclerView() {
-
         var layoutManager = LinearLayoutManager(context)
         mAdapter = MainAdapter()
         mRvList?.layoutManager = layoutManager
@@ -73,7 +76,8 @@ public class MainFragment : MainContract.View,Fragment(){
 
     override fun addCount(count: Int) {
         mAdapter?.addItem(count,
-                {position -> mRvList?.scrollToPosition(position - 1)})
+                {position ->
+                    mRvList?.scrollToPosition(position - 1)
+                })
     }
-
 }

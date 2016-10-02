@@ -22,6 +22,8 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
         notifyDataSetChanged()
     }
 
+    var maxCount: Int? = null
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MainViewHolder {
         var v: View = LayoutInflater.from(parent?.context)
                 .inflate(R.layout.random_count_item,parent,false)
@@ -33,9 +35,15 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MainViewHolder?, position: Int) {
+        maxCount = list.max()
+        Log.i("Hello",maxCount.toString())
         holder?.mTvSerialNum?.text = "${position + 1}"
         holder?.mTvCount?.text = "${list?.get(position)}"
-        holder?.mImgTag?.visibility = View.INVISIBLE
+        if(maxCount == list[position]) {
+            holder?.mImgTag?.visibility = View.VISIBLE
+        } else {
+            holder?.mImgTag?.visibility = View.INVISIBLE
+        }
     }
 
     /**

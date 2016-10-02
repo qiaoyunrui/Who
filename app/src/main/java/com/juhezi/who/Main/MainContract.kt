@@ -2,6 +2,7 @@ package com.juhezi.who.main
 
 import com.juhezi.who.BasePresenter
 import com.juhezi.who.BaseView
+import java.text.FieldPosition
 import java.util.*
 
 /**
@@ -11,12 +12,10 @@ public interface MainContract{
 
     interface Presenter : BasePresenter {
 
-        var list: ArrayList<Int>
-
         /**
          * 获取随机数字
          */
-        fun getCount() : Int
+        fun getCount(list: ArrayList<Int>,error: () -> Unit) : Int
     }
 
     interface View : BaseView<Presenter> {

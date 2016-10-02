@@ -10,8 +10,6 @@ import java.util.*
  */
 class MainPresenter(var mView: MainContract.View) : MainContract.Presenter {
 
-    override var list: ArrayList<Int> = ArrayList<Int>()
-
     private var TAG: String = "MainPresenter"
 
     private var mRandom: ARandom? = null
@@ -25,12 +23,12 @@ class MainPresenter(var mView: MainContract.View) : MainContract.Presenter {
         mView.setPresenter(this)
     }
 
-    override fun getCount(): Int{
+    override fun getCount(list: ArrayList<Int>,error: () -> Unit): Int{
         var result = mRandom?.next()
         var index = 0
         while (judgeRepeat(result!!,list)) { //如果有重复
             if(index >= 16) {    //循环次数太多，可与理解为都是重复的了
-                throw Exception()
+                error()
             }
             result = mRandom?.next()
             index++
@@ -39,7 +37,7 @@ class MainPresenter(var mView: MainContract.View) : MainContract.Presenter {
     }
 
     /**
-     * 判断是否为重复元素
+     * 判断是否为重复元素(there are problem!!!)
      */
     fun judgeRepeat(param: Int,list: ArrayList<Int>) : Boolean{
         list.forEach {
